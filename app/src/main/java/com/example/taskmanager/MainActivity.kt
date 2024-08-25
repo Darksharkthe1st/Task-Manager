@@ -1,15 +1,11 @@
-package com.example.myapplication
+package com.example.taskmanager
 
-import android.app.ActivityManager.TaskDescription
-import android.graphics.drawable.shapes.Shape
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,26 +18,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myapplication.ui.theme.MyApplicationTheme
+import com.example.taskmanager.ui.theme.TaskManagerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyApplicationTheme {
+            TaskManagerTheme {
                 myFunction()
             }
         }
     }
 }
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -64,7 +59,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun myFunction(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.
-            fillMaxSize()
+        fillMaxSize()
     ) {
         aTask(
             modifier = modifier,
@@ -72,6 +67,7 @@ fun myFunction(modifier: Modifier = Modifier) {
             taskDesc = "Task Description - The FitnessGram™ Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal. [beep] A single lap should be completed each time you hear this sound. [ding] Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start. On your mark, get ready, start.",
             taskDate = "01/13/2000"
         )
+        Greeting("Myself")
     }
 }
 
@@ -119,7 +115,7 @@ fun aTask(
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    MyApplicationTheme {
+    TaskManagerTheme {
         Greeting("Android")
     }
 }
@@ -127,7 +123,7 @@ fun GreetingPreview() {
 @Preview(showBackground = true)
 @Composable
 fun myPreview() {
-    MyApplicationTheme {
+    TaskManagerTheme {
         myFunction()
     }
 }
