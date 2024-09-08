@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="Low_Color">#92C37D</color>
+    <color name="Medium_Color">#F6B26B</color>
+    <color name="High_Color">#DF6666</color>
+    <color name="None_Color">#76A4AE</color>
+    <color name="Robotics_Category">#1A4890</color>
+    <color name="College_Category">#C8D9F7</color>
+    <color name="Projects_Category">#CFDFE2</color>
+    <color name="Personal_Category">#45808D</color>
+    <color name="Clubs_Category">#0C343D</color>
 </resources>

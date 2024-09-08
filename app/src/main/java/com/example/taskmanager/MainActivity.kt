@@ -23,6 +23,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.taskmanager.data.Task
+import com.example.taskmanager.ui.TaskManagerApp
 import com.example.taskmanager.ui.theme.TaskManagerTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,99 +33,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TaskManagerTheme {
-                myFunction()
+                TaskManagerApp()
             }
         }
-    }
-}
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "It is what it is."
-        )
-        Image(
-            painter = painterResource(R.drawable.nerdbob),
-            contentDescription = "nerdbob"
-        )
-    }
-
-}
-
-@Composable
-fun myFunction(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.
-        fillMaxSize()
-    ) {
-        aTask(
-            modifier = modifier,
-            taskName = "My Task",
-            taskDesc = "Task Description - The FitnessGram™ Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal. [beep] A single lap should be completed each time you hear this sound. [ding] Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start. On your mark, get ready, start.",
-            taskDate = "01/13/2000"
-        )
-        Greeting("Myself")
-    }
-}
-
-@Composable
-fun aTask(
-    modifier: Modifier = Modifier,
-    taskName: String,
-    taskDesc: String,
-    taskDate: String
-) {
-    //The whole task is a button.
-    Button(
-        modifier = modifier
-            .fillMaxWidth(),
-        onClick = {},
-        shape = RoundedCornerShape(20.dp),
-    ) {
-        Column(
-            horizontalAlignment = Alignment.Start,
-            modifier = modifier.fillMaxWidth()
-        ) {
-            Row() {
-
-                Text(
-                    text = taskName,
-                    fontSize = 36.sp
-                )
-
-                Text(
-                    text = taskDate,
-                    fontSize = 14.sp,
-                    textAlign = TextAlign.End,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
-            }
-
-            Text(
-                text = taskDesc
-            )
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TaskManagerTheme {
-        Greeting("Android")
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun myPreview() {
-    TaskManagerTheme {
-        myFunction()
     }
 }
