@@ -29,7 +29,7 @@ object DataSource {
         ),
 
         Task(
-            name = "Read \"Lord of the Flies\"",
+            name = "Read \"The Life of Pi\"",
             desc = "Read the book given to you by Mr. Nicastro. Return it at a Cricket Club Meeting and discuss it there.",
             date = Date(2025, 6, 8),
             category = Category.Personal,
