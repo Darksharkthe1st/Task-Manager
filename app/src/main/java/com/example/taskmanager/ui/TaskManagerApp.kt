@@ -29,6 +29,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,14 +42,17 @@ import com.example.taskmanager.data.DataSource
 import com.example.taskmanager.data.Task
 import com.example.taskmanager.ui.theme.Poppins
 import com.example.taskmanager.ui.theme.TaskManagerTheme
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 
 @Composable
 fun TaskManagerApp() {
     Column() {
-        AppBar()
+        AppBar(
+modifier =Modifier.weight(2f)
+        )
         LazyColumn(
-
+modifier =Modifier.weight(19.5f)
         ) {
             items(DataSource.tasks) {task ->
                 TaskCard(
@@ -63,7 +68,30 @@ fun TaskManagerApp() {
 @Composable
 fun AppBar(modifier: Modifier = Modifier) {
     TopAppBar(
-        title = { Text(stringResource(R.string.app_title)) },
+        title = {
+            Row(
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(2.dp)
+            ) {
+                Text(
+                    stringResource(R.string.app_title),
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.weight(1f)
+                )
+
+                Button(
+                    onClick = { },
+                    modifier = Modifier.padding(8.dp)
+                ) {
+                    Text(
+                        stringResource(R.string.new_task)
+                    )
+                }
+            }
+        },
         colors = TopAppBarDefaults.mediumTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer
         ),
@@ -136,7 +164,6 @@ fun TaskCard(
                 text = task.desc
             )
         }
-
     }
 }
 

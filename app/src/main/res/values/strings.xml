@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Task Manager</string>
     <string name="app_title">Task Manager</string>
+    <string name="new_task">New</string>
 </resources>
