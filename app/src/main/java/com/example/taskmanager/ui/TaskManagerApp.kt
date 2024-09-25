@@ -68,17 +68,22 @@ fun TaskManagerApp() {
                 )
             }
         }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
+        BottomBar()
+    }
+}
+
+@Composable
+fun BottomBar(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        Button(
+            onClick = {},
+            modifier = Modifier
+                .fillMaxWidth(),
+            shape = RectangleShape
         ) {
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .fillMaxWidth(),
-                shape = RectangleShape
-            ) {
-                Icon(imageVector = Icons.Filled.Menu, contentDescription = null)
-            }
+            Icon(imageVector = Icons.Filled.Menu, contentDescription = null)
         }
     }
 }
