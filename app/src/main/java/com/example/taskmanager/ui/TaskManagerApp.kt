@@ -14,11 +14,16 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -26,6 +31,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.res.stringResource
@@ -49,16 +57,27 @@ import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 fun TaskManagerApp() {
     Column() {
         AppBar(
-modifier =Modifier.weight(2f)
+            modifier = Modifier.weight(2f)
         )
         LazyColumn(
-modifier =Modifier.weight(19.5f)
+            modifier = Modifier.weight(19.5f)
         ) {
-            items(DataSource.tasks) {task ->
+            items(DataSource.tasks) { task ->
                 TaskCard(
                     task = task
                 )
-
+            }
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Button(
+                onClick = {},
+                modifier = Modifier
+                    .fillMaxWidth(),
+                shape = RectangleShape
+            ) {
+                Icon(imageVector = Icons.Filled.Menu, contentDescription = null)
             }
         }
     }
