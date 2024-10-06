@@ -46,6 +46,21 @@ object DataSource {
             priority = Priority.High
 
         )
+    )
 
+    val settings = listOf(
+        Setting(
+            name = "Test",
+            desc = "I'm meant to be writing at this moment. But I'm not lmao, cope.",
+            settingOn = false,
+            subSetting = SubSetting.General
+        ),
+
+        Setting(
+            name = "Test1",
+            desc = "I'm meant to be writing at this moment. But I'm not lmao, cope.2",
+            settingOn = true,
+            subSetting = SubSetting.General
+        )
     )
 }
