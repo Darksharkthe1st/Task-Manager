@@ -17,28 +17,26 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Slider
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.taskmanager.data.DataSource
-import com.example.taskmanager.data.Setting
+import com.example.taskmanager.data.Screen
 
 @Preview(showBackground = true)
 @Composable
-fun SettingScreen(
+fun MenuScreen(
     modifier: Modifier = Modifier
 ) {
     Column (
         modifier = modifier
-        .fillMaxSize(),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -57,9 +55,9 @@ fun SettingScreen(
         LazyColumn(
             modifier = Modifier.weight(20f)
         ) {
-            items(DataSource.settings) { setting ->
-                SettingCard(
-                    setting = setting
+            items(DataSource.screens) { screen ->
+                ScreenCard(
+                    screen = screen
                 )
             }
         }
@@ -67,44 +65,24 @@ fun SettingScreen(
 }
 
 @Composable
-fun SettingCard(
-    setting: Setting,
+fun ScreenCard(
+    screen: Screen,
     modifier: Modifier = Modifier
 ) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
+    Button(
+        onClick = { },
         modifier = modifier
-            .fillMaxWidth()
-            .padding(4.dp)
+            .padding(10.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
-        Card(
-            modifier = modifier
-                .padding(4.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-            border = BorderStroke(1.dp, Color.Black)
-        ) {
-            Row {
-                Text(
-                    modifier = modifier
-                        .weight(1f)
-                        .padding(4.dp),
-                    text = setting.name,
-                    style = MaterialTheme.typography.displaySmall
-                )
-                Switch(
-                    modifier = modifier
-                        .padding(8.dp),
-                    checked = setting.settingOn,
-                    onCheckedChange = {
-                        setting.settingOn = it
-                    }
-                )
-            }
+        Row {
             Text(
                 modifier = modifier
-                    .padding(4.dp),
-                text = setting.desc,
-                style = MaterialTheme.typography.bodyMedium
+                    .weight(1f),
+                text = screen.name,
+                style = MaterialTheme.typography.displaySmall,
+                textAlign = TextAlign.Center,
+                color = Color.Black
             )
         }
     }

@@ -3,6 +3,28 @@ package com.example.taskmanager.data
 import java.util.Date
 
 object DataSource {
+    val screens = listOf(
+        Screen(
+            name = "Settings"
+        ),
+
+        Screen(
+            name = "New Task"
+        ),
+
+        Screen(
+            name = "Current Tasks"
+        ),
+
+        Screen(
+            name = "Streak"
+        ),
+
+        Screen(
+            name = "Shop"
+        )
+    )
+
     val tasks = listOf(
         Task(
             name = "Design Lesson Plan",
