@@ -3,6 +3,28 @@ package com.example.taskmanager.data
 import java.util.Date
 
 object DataSource {
+    val screens = listOf(
+        Screen(
+            name = "Settings"
+        ),
+
+        Screen(
+            name = "New Task"
+        ),
+
+        Screen(
+            name = "Current Tasks"
+        ),
+
+        Screen(
+            name = "Streak"
+        ),
+
+        Screen(
+            name = "Shop"
+        )
+    )
+
     val tasks = listOf(
         Task(
             name = "Design Lesson Plan",
@@ -46,6 +68,21 @@ object DataSource {
             priority = Priority.High
 
         )
+    )
 
+    val settings = listOf(
+        Setting(
+            name = "Test",
+            desc = "I'm meant to be writing at this moment. But I'm not lmao, cope.",
+            settingOn = false,
+            subSetting = SubSetting.General
+        ),
+
+        Setting(
+            name = "Test1",
+            desc = "I'm meant to be writing at this moment. But I'm not lmao, cope.2",
+            settingOn = true,
+            subSetting = SubSetting.General
+        )
     )
 }
