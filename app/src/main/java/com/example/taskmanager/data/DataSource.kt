@@ -25,7 +25,7 @@ object DataSource {
         )
     )
 
-    val tasks = listOf(
+    var tasks = listOf(
         Task(
             name = "Design Lesson Plan",
             desc = "Write up a plan for each meeting, detailing how and when each team member will learn about their robotics subteam",
@@ -85,4 +85,8 @@ object DataSource {
             subSetting = SubSetting.General
         )
     )
+}
+
+object ShopItems {
+
 }

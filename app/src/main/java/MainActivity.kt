@@ -1,10 +1,9 @@
-package com.example.taskmanager.ui.theme
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import Screens.TaskManagerApp
+import screens.TaskManagerApp
+import com.example.taskmanager.ui.theme.TaskManagerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

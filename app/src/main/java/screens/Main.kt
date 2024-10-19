@@ -1,4 +1,4 @@
-package Screens
+package screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -143,14 +144,23 @@ fun TaskCard(
                             containerColor = colorResource(task.category.color),
                             contentColor = Color.White,
                             disabledContentColor = colorResource(task.category.color),
-                            disabledContainerColor = colorResource(task.category.color)
-                        )
+                            disabledContainerColor = colorResource(task.category.color))
                     ) {
                         Text(
                             text = task.category.name,
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(4.dp)
                         )
+                    }
+                    Button(
+                        onClick = { },
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .padding(4.dp)
+                    ) {
+                        Icon(imageVector = Icons.Filled.Check, contentDescription = null)
                     }
                 }
             }
@@ -178,7 +188,7 @@ fun TaskCard(
 
 @Preview(showBackground = true)
 @Composable
-fun appPreview() {
+fun AppPreview() {
     TaskManagerTheme {
         TaskManagerApp()
     }
