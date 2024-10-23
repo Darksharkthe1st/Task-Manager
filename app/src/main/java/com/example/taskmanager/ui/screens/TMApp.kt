@@ -1,4 +1,4 @@
-package screens
+package com.example.taskmanager.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
