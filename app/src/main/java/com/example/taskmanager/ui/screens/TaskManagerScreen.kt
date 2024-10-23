@@ -1,5 +1,6 @@
 package com.example.taskmanager.ui.screens
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,27 +35,44 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.example.taskmanager.R
 import com.example.taskmanager.data.DataSource
 import com.example.taskmanager.data.Task
+import com.example.taskmanager.ui.TaskViewModel
 import com.example.taskmanager.ui.theme.TaskManagerTheme
 
 
+enum class TaskManagerScreen(
+    @StringRes val title: Int
+) {
+    Home(title = R.string.home),
+    CreateTask(title = R.string.create_task),
+    Menu(title = R.string.menu),
+    Settings(title = R.string.settings),
+    Shop(title = R.string.shop),
+    Streak(title = R.string.streak),
+
+}
+
 @Composable
-fun TaskManagerApp() {
+fun TaskManagerApp(
+    viewModel: TaskViewModel = TaskViewModel(),
+    navController: NavHostController = rememberNavController()
+) {
+
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentScreen = TaskManagerScreen.valueOf(
+        backStackEntry?.destination?.route ?: TaskManagerScreen.Home.name
+    )
+
     Column() {
         AppBar(
             modifier = Modifier.weight(2f)
         )
-        LazyColumn(
-            modifier = Modifier.weight(19.5f)
-        ) {
-            items(DataSource.tasks) { task ->
-                TaskCard(
-                    task = task
-                )
-            }
-        }
+        HomeScreen(modifier = Modifier.weight(19.5f))
         BottomBar()
     }
 }
@@ -108,82 +127,6 @@ fun AppBar(modifier: Modifier = Modifier) {
         ),
         modifier = modifier
     )
-}
-
-//Represents one task
-@Composable
-fun TaskCard(
-    task: Task,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(4.dp)
-    ) {
-        Column() {
-            //The header
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-            ) {
-                Text(
-                    text = task.name,
-                    style = MaterialTheme.typography.displayLarge,
-                    modifier = Modifier
-                        .weight(3f)
-                )
-                Spacer(modifier = Modifier)
-                Column(
-                    modifier = Modifier
-                        .weight(weight = 1f, fill = true),
-                    verticalArrangement = Arrangement.Bottom,
-                ) {
-                    Card(
-                        colors = CardColors(
-                            containerColor = colorResource(task.category.color),
-                            contentColor = Color.White,
-                            disabledContentColor = colorResource(task.category.color),
-                            disabledContainerColor = colorResource(task.category.color))
-                    ) {
-                        Text(
-                            text = task.category.name,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(4.dp)
-                        )
-                    }
-                    Button(
-                        onClick = { },
-                        modifier = modifier
-                            .fillMaxWidth()
-                            .padding(4.dp)
-                    ) {
-                        Icon(imageVector = Icons.Filled.Check, contentDescription = null)
-                    }
-                }
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .background(color = colorResource(task.priority.color))
-            ) {
-                Text(
-                    text = "Date Due: ${task.date.month}/${task.date.date}/${task.date.year}",
-                    modifier = Modifier.weight(1f),
-                    color = Color.Black
-                )
-                Text(
-                    text = "Priority: ${task.priority.name}",
-                    color = Color.Black
-                )
-            }
-            Text(
-                text = task.desc
-            )
-        }
-    }
 }
 
 @Preview(showBackground = true)
