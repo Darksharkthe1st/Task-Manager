@@ -1,27 +1,29 @@
 package com.example.taskmanager.data
 
+import androidx.compose.ui.res.stringResource
+import com.example.taskmanager.R
 import java.util.Date
 
 object DataSource {
     val screens = listOf(
         Screen(
-            name = "Settings"
+            name =R.string.settings
         ),
 
         Screen(
-            name = "New Task"
+            name = R.string.create_task
         ),
 
         Screen(
-            name = "Current Tasks"
+            name = R.string.home
         ),
 
         Screen(
-            name = "Streak"
+            name = R.string.streak
         ),
 
         Screen(
-            name = "Shop"
+            name = R.string.shop
         )
     )
 
