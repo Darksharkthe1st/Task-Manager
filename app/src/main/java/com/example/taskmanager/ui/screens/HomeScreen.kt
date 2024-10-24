@@ -48,7 +48,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeAppBar(modifier: Modifier = Modifier) {
+fun HomeAppBar(modifier: Modifier = Modifier, title: String) {
     TopAppBar(
         title = {
             Row(

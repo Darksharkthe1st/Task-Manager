@@ -28,8 +28,10 @@ import com.example.taskmanager.data.Screen
 
 @Preview(showBackground = true)
 @Composable
-fun Menu(
-    modifier: Modifier = Modifier
+fun Menu (
+    modifier: Modifier = Modifier,
+    OnOptionClick: (String) -> Unit,
+    OnSelfClick: () -> Unit
 ) {
     Column (
         modifier = modifier
@@ -41,7 +43,7 @@ fun Menu(
             modifier = modifier.fillMaxWidth()
         ) {
             Button(
-                onClick = {},
+                onClick = { OnSelfClick() },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RectangleShape,
                 colors = ButtonDefaults.buttonColors(containerColor = Color(68,94,145))
@@ -54,7 +56,8 @@ fun Menu(
         ) {
             items(DataSource.screens) { screen ->
                 ScreenCard(
-                    screen = screen
+                    screen = screen,
+                    onButtonClick = OnOptionClick
                 )
             }
         }
@@ -64,10 +67,11 @@ fun Menu(
 @Composable
 fun ScreenCard(
     screen: Screen,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onButtonClick: (String) -> Unit
 ) {
     Button(
-        onClick = { },
+        onClick = { onButtonClick(screen.name) },
         modifier = modifier
             .padding(10.dp),
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)

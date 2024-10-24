@@ -1,23 +1,16 @@
 package com.example.taskmanager.ui.screens
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -32,9 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -43,17 +34,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.taskmanager.R
-import com.example.taskmanager.data.DataSource
-import com.example.taskmanager.data.Task
 import com.example.taskmanager.ui.TaskViewModel
 import com.example.taskmanager.ui.theme.TaskManagerTheme
 
 
 enum class TaskManagerScreen(
     @StringRes val title: Int,
-    @get:Composable val topBar: (String) -> Unit
 ) {
-    Home(title = R.string.home, ),
+    Home(title = R.string.home),
     CreateTask(title = R.string.create_task),
     Menu(title = R.string.menu),
     Settings(title = R.string.settings),
@@ -74,73 +62,72 @@ fun TaskManagerApp(
         backStackEntry?.destination?.route ?: TaskManagerScreen.Home.name
     )
 
-    Scaffold(
-        modifier = modifier,
-        topBar = { AppBar(title = currentScreen.title) },
-        bottomBar = { BottomBar() }
-    ) { innerPadding ->
-        val uiState by viewModel.uiState.collectAsState()
 
-        NavHost(
-            navController = navController,
-            startDestination = TaskManagerScreen.Home.name,
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            //Home Screen:
-            composable(route = TaskManagerScreen.Home.name) {
-                HomeScreen()
+    Column() {
+        Scaffold(
+            modifier = modifier,
+            topBar = { AppBar(title = currentScreen.title) },
+            bottomBar = { BottomBar( navController = navController) }
+        ) { innerPadding ->
+            val uiState by viewModel.uiState.collectAsState()
+
+            NavHost(
+                navController = navController,
+                startDestination = TaskManagerScreen.Home.name,
+                modifier = Modifier.padding(innerPadding)
+            ) {
+                //Home Screen:
+                composable(route = TaskManagerScreen.Home.name) {
+                    HomeScreen()
+                }
+
+                //Create Task Screen:
+                composable(route = TaskManagerScreen.CreateTask.name) {
+                    createTask()
+                }
+
+                //Menu Screen:
+                composable(route = TaskManagerScreen.Menu.name) {
+                    Menu(OnOptionClick = { location: String ->
+                        navController.navigate(location)
+                    },
+                        OnSelfClick = { navController.popBackStack() }
+                    )
+                }
+
+                //Settings Screen:
+                composable(route = TaskManagerScreen.Settings.name) {
+                    SettingScreen()
+                }
+
+                //Shop Screen:
+                composable(route = TaskManagerScreen.Shop.name) {
+                    Shop()
+                }
+
+                //Streak Screen:
+                composable(route = TaskManagerScreen.Streak.name) {
+                    StreakScreen()
+                }
+
+
             }
-
-            //Create Task Screen:
-            composable(route = TaskManagerScreen.CreateTask.name) {
-                createTask()
-            }
-
-            //Menu Screen:
-            composable(route = TaskManagerScreen.Menu.name) {
-                Menu()
-            }
-
-            //Settings Screen:
-            composable(route = TaskManagerScreen.Settings.name) {
-                SettingScreen()
-            }
-
-            //Shop Screen:
-            composable(route = TaskManagerScreen.Shop.name) {
-                Shop()
-            }
-
-            //Streak Screen:
-            composable(route = TaskManagerScreen.Streak.name) {
-                StreakScreen()
-            }
-
-
-
-
-
-
         }
     }
 
 
-    Column() {
-        AppBar(
-            modifier = Modifier.weight(2f)
-        )
-        HomeScreen(modifier = Modifier.weight(19.5f))
-        BottomBar()
-    }
+
 }
 
 @Composable
-fun BottomBar(modifier: Modifier = Modifier) {
+fun BottomBar(modifier: Modifier = Modifier,
+              navController: NavHostController
+) {
     Row(
         modifier = modifier.fillMaxWidth(),
     ) {
         Button(
-            onClick = {  },
+            onClick = { navController.navigate(TaskManagerScreen.Menu.name) },
             modifier = Modifier
                 .fillMaxWidth(),
             shape = RectangleShape,
