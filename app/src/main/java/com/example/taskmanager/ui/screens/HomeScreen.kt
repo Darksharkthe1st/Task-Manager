@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.example.taskmanager.data.DataSource
 import com.example.taskmanager.data.Task
 
+
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
     LazyColumn(
@@ -110,7 +111,7 @@ fun TaskCard(
                 )
             }
             Text(
-                text = task.desc
+                text = task.description
             )
         }
     }
