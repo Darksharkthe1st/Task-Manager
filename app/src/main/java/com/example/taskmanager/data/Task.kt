@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import com.example.taskmanager.R
 import java.util.Date
+import java.util.Vector
 
 enum class Priority(
     @ColorRes val color: Int
@@ -15,20 +16,37 @@ enum class Priority(
     None(R.color.None_Color)
 }
 
-enum class Category(
-    @ColorRes val color: Int
-) {
-    Robotics(R.color.Robotics_Category),
-    College(R.color.College_Category),
-    Projects(R.color.Projects_Category),
-    Personal(R.color.Personal_Category),
-    Clubs(R.color.Clubs_Category)
-}
+data class Category(
+    var name: String,
+    @ColorRes val color: Int,
+)
 
 data class Task(
     val name: String,
-    val desc: String,
+    val description: String,
     val date: Date,
     val category: Category,
     val priority: Priority
 )
+
+
+
+public fun Robotics() : Category{
+    return Category("Robotics", R.color.Robotics_Category)
+}
+
+public fun College() : Category {
+    return Category("College", R.color.College_Category)
+}
+
+public fun Projects() : Category{
+    return Category("Projects", R.color.Projects_Category)
+}
+
+public fun Personal() : Category{
+    return Category("Personal", R.color.Personal_Category)
+}
+
+public fun Clubs() : Category{
+    return Category("Clubs", R.color.Clubs_Category)
+}

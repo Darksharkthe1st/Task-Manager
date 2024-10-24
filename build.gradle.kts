@@ -3,3 +3,15 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
 }
+
+//android {
+//    compileSdkVersion(33)
+//}
+
+//dependencies {
+//    implementation("androidx.palette:palette:1.0.0")
+//}
+
+dependencies {
+    "androidx.palette:palette:1.0.0"
+}
