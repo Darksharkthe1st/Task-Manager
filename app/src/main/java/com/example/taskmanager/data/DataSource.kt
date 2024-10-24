@@ -11,10 +11,6 @@ object DataSource {
         ),
 
         Screen(
-            name =R.string.settings
-        ),
-
-        Screen(
             name = R.string.create_task
         ),
 
