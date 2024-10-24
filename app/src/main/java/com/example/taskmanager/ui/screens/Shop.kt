@@ -29,18 +29,6 @@ fun Shop(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Row(
-            modifier = modifier.fillMaxWidth()
-        ) {
-            Button(
-                onClick = {},
-                modifier = Modifier.fillMaxWidth(),
-                shape = RectangleShape,
-                colors = ButtonDefaults.buttonColors(containerColor = Color(68,94,145))
-            ) {
-                Icon(imageVector = Icons.Filled.Menu, contentDescription = null)
-            }
-        }
         LazyColumn(
             modifier = Modifier.weight(20f)
         ) {

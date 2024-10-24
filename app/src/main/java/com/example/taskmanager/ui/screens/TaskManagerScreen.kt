@@ -1,23 +1,16 @@
 package com.example.taskmanager.ui.screens
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -33,9 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -44,8 +35,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.taskmanager.R
-import com.example.taskmanager.data.DataSource
-import com.example.taskmanager.data.Task
 import com.example.taskmanager.ui.TaskViewModel
 import com.example.taskmanager.ui.theme.TaskManagerTheme
 
@@ -79,7 +68,16 @@ fun TaskManagerApp(
     Column() {
         Scaffold(
             modifier = modifier,
-            topBar = { AppBar(title = currentScreen.title) },
+            topBar = {
+                if (currentScreen.name == TaskManagerScreen.Home.name)
+                    HomeAppBar(
+                title = currentScreen.title,
+                onNewClick = {
+                    navController.navigate(TaskManagerScreen.CreateTask.name)
+                })
+                else
+                    TopBar(title = currentScreen.title)
+                     },
             bottomBar = { BottomBar( navController =  navController) }
         ) { innerPadding ->
             val uiState by viewModel.uiState.collectAsState()
@@ -132,6 +130,33 @@ fun TaskManagerApp(
 
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopBar(modifier: Modifier = Modifier,
+               @StringRes title: Int) {
+    TopAppBar(
+        title = {
+            Row(
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(2.dp)
+            ) {
+                Text(
+                    stringResource(title),
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        },
+        colors = TopAppBarDefaults.mediumTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        ),
+        modifier = modifier
+    )
+}
+
 @Composable
 fun BottomBar(modifier: Modifier = Modifier, navController: NavHostController) {
     Row(
@@ -147,41 +172,6 @@ fun BottomBar(modifier: Modifier = Modifier, navController: NavHostController) {
             Icon(imageVector = Icons.Filled.Menu, contentDescription = null)
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AppBar(modifier: Modifier = Modifier, @StringRes title: Int) {
-    TopAppBar(
-        title = {
-            Row(
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .padding(2.dp)
-            ) {
-                Text(
-                    stringResource(R.string.app_title),
-                    style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.weight(1f)
-                )
-
-                Button(
-                    onClick = {},
-                    modifier = Modifier.padding(8.dp)
-                ) {
-                    Text(
-                        stringResource(R.string.new_task)
-                    )
-                }
-            }
-        },
-        colors = TopAppBarDefaults.mediumTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        ),
-        modifier = modifier
-    )
 }
 
 @Preview(showBackground = true)
