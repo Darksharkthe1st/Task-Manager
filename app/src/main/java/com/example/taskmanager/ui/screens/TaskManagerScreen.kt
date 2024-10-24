@@ -19,8 +19,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,7 +42,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.taskmanager.R
 import com.example.taskmanager.ui.TaskViewModel
 import com.example.taskmanager.ui.theme.TaskManagerTheme
-
+import kotlinx.coroutines.flow.MutableStateFlow
 
 enum class TaskManagerScreen(
     @StringRes val title: Int
@@ -48,8 +53,11 @@ enum class TaskManagerScreen(
     Settings(title = R.string.settings),
     Shop(title = R.string.shop),
     Streak(title = R.string.streak),
+    Work(title = R.string.work)
 
 }
+
+private val recomposeToggleState: MutableState<Boolean> = mutableStateOf(false)
 
 @Composable
 fun TaskManagerApp(
@@ -57,6 +65,10 @@ fun TaskManagerApp(
     viewModel: TaskViewModel = TaskViewModel(),
     navController: NavHostController = rememberNavController()
 ) {
+
+    LaunchedEffect(recomposeToggleState.value) {}
+
+       val dummyVariable = remember { mutableStateOf("foo") }
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = TaskManagerScreen.valueOf(
@@ -89,13 +101,20 @@ fun TaskManagerApp(
             ) {
                 //Home Screen:
                 composable(route = TaskManagerScreen.Home.name) {
-                    HomeScreen()
+                    HomeScreen(onCheck = {x: Int->
+                        viewModel.onTaskDone(x)
+                        navController.navigate(TaskManagerScreen.Menu.name)
+                        navController.navigate(TaskManagerScreen.Home.name)
+                    })
                 }
 
                 //Create Task Screen:
                 composable(route = TaskManagerScreen.CreateTask.name) {
-                    TaskMakerScreen()
+                    TaskMakerScreen(
+                        onSubmit = {navController.navigate(TaskManagerScreen.Home.name)}
+                    )
                 }
+
 
                 //Menu Screen:
                 composable(route = TaskManagerScreen.Menu.name) {
@@ -121,12 +140,21 @@ fun TaskManagerApp(
                     StreakScreen()
                 }
 
+                //Work Screen:
+                composable(route = TaskManagerScreen.Work.name) {
+                    WorkScreen()
+                }
+
 
             }
         }
     }
 
 
+
+}
+
+fun refresh() {
 
 }
 
@@ -180,4 +208,8 @@ fun AppPreview() {
     TaskManagerTheme {
         TaskManagerApp()
     }
+}
+
+fun manualRecompose() {
+    recomposeToggleState.value = !recomposeToggleState.value
 }

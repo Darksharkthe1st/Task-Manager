@@ -16,17 +16,29 @@ enum class Priority(
     None(R.color.None_Color)
 }
 
+enum class Difficulty(
+    @ColorRes val color: Int
+) {
+    Easy(R.color.Low_Color),
+    Medium(R.color.Medium_Color),
+    Hard(R.color.High_Color),
+    None(R.color.None_Color)
+}
+
 data class Category(
     var name: String,
     @ColorRes val color: Int,
 )
 
 data class Task(
+    val id: Int,
+    var done: Boolean,
     val name: String,
     val description: String,
     val date: Date,
     val category: Category,
-    val priority: Priority
+    val priority: Priority,
+    val difficulty: Difficulty
 )
 
 

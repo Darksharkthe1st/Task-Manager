@@ -12,8 +12,8 @@
     <color name="High_Color">#DF6666</color>
     <color name="None_Color">#76A4AE</color>
     <color name="Robotics_Category">#1A4890</color>
-    <color name="College_Category">#C8D9F7</color>
-    <color name="Projects_Category">#CFDFE2</color>
+    <color name="College_Category">#FF0000</color>
+    <color name="Projects_Category">#FF00FF</color>
     <color name="Personal_Category">#45808D</color>
     <color name="Clubs_Category">#0C343D</color>
 </resources>

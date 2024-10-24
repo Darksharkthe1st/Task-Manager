@@ -1,5 +1,6 @@
 package com.example.taskmanager.ui.screens
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -34,10 +35,13 @@ import androidx.compose.ui.unit.dp
 import com.example.taskmanager.R
 import com.example.taskmanager.data.DataSource
 import com.example.taskmanager.data.Task
+import com.example.taskmanager.ui.theme.TaskManagerTheme
 
-@Preview
+var onCheckClick: (Int) -> Unit = { }
+
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, onCheck: (Int) -> Unit) {
+    onCheckClick = onCheck
     LazyColumn(
         modifier = modifier
     ) {
@@ -46,6 +50,14 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 task = task
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomePreview() {
+    TaskManagerTheme {
+        HomeScreen {  }
     }
 }
 
@@ -95,7 +107,13 @@ fun TaskCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(4.dp),
+        colors = CardColors(
+            containerColor = colorResource(task.difficulty.color),
+            contentColor = Color.Black,
+            disabledContentColor = Color.LightGray,
+            disabledContainerColor = Color.LightGray
+        )
     ) {
         Column() {
             //The header
@@ -132,7 +150,11 @@ fun TaskCard(
                         )
                     }
                     Button(
-                        onClick = { },
+                        onClick = {
+                            Log.d("Size: ", "" + DataSource.tasks.size)
+                            onCheckClick(task.id)
+                            Log.d("Size: ", "" + DataSource.tasks.size)
+                        },
                         modifier = modifier
                             .fillMaxWidth()
                             .padding(4.dp)
@@ -144,7 +166,7 @@ fun TaskCard(
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
-                    .background(color = colorResource(task.priority.color))
+                    .background(color = Color.LightGray)
             ) {
                 Text(
                     text = "Date Due: ${task.date.month}/${task.date.date}/${task.date.year}",
