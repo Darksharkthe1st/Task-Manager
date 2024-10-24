@@ -1,5 +1,7 @@
 package com.example.taskmanager.data
 
+import androidx.annotation.StringRes
+
 data class Screen(
-    val name: String
+    @StringRes val name: Int
 )

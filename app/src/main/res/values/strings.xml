@@ -3,9 +3,9 @@
     <string name="app_title">Task Manager</string>
     <string name="new_task">New</string>
     <string name="home">Home</string>
-    <string name="create_task">create_task</string>
-    <string name="menu">menu</string>
-    <string name="settings">settings</string>
-    <string name="shop">shop</string>
-    <string name="streak">streak</string>
+    <string name="create_task">CreateTask</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Settings</string>
+    <string name="shop">Shop</string>
+    <string name="streak">Streak</string>
 </resources>

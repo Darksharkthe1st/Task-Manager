@@ -1,5 +1,6 @@
 package com.example.taskmanager.ui.screens
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,16 +21,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.taskmanager.data.DataSource
 import com.example.taskmanager.data.Screen
 
-@Preview(showBackground = true)
 @Composable
-fun Menu(
-    modifier: Modifier = Modifier
+fun Menu (
+    modifier: Modifier = Modifier,
+    OnOptionClick: (Int) -> Unit,
+    OnSelfClick: () -> Unit
 ) {
     Column (
         modifier = modifier
@@ -41,7 +44,7 @@ fun Menu(
             modifier = modifier.fillMaxWidth()
         ) {
             Button(
-                onClick = {},
+                onClick = { OnSelfClick() },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RectangleShape,
                 colors = ButtonDefaults.buttonColors(containerColor = Color(68,94,145))
@@ -54,7 +57,8 @@ fun Menu(
         ) {
             items(DataSource.screens) { screen ->
                 ScreenCard(
-                    screen = screen
+                    screen = screen,
+                    onButtonClick = OnOptionClick
                 )
             }
         }
@@ -64,10 +68,11 @@ fun Menu(
 @Composable
 fun ScreenCard(
     screen: Screen,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onButtonClick: (Int) -> Unit
 ) {
     Button(
-        onClick = { },
+        onClick = { onButtonClick(screen.name) },
         modifier = modifier
             .padding(10.dp),
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
@@ -76,7 +81,7 @@ fun ScreenCard(
             Text(
                 modifier = modifier
                     .weight(1f),
-                text = screen.name,
+                text = stringResource(screen.name),
                 style = MaterialTheme.typography.displaySmall,
                 textAlign = TextAlign.Center,
                 color = Color.Black
