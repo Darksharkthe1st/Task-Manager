@@ -14,6 +14,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DropdownMenu
@@ -58,13 +60,21 @@ fun TaskMakerScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Column(
-            modifier = Modifier
-                .weight(20f)
-                .fillMaxWidth()
+        Card(
+            modifier = modifier.fillMaxWidth(),
+            colors = CardColors(
+                containerColor = Color.LightGray,
+                contentColor = Color.Red,
+                disabledContentColor = Color.Blue,
+                disabledContainerColor = Color.Green
+            )
         ) {
-            Row(
-                modifier = modifier
+            Column(
+                modifier = Modifier
+                    .weight(20f)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 //Name:
                 var name by remember { mutableStateOf("") }
@@ -73,6 +83,7 @@ fun TaskMakerScreen(
                     onValueChange = { name = it },
                     label = { Text("Task Name") },
                 )
+
                 //Description:
                 var desc by remember { mutableStateOf("") }
                 TextField(
@@ -80,11 +91,11 @@ fun TaskMakerScreen(
                     onValueChange = { desc = it },
                     label = { Text("Task Description") },
                 )
+
                 //Priority:
                 var expanded by remember { mutableStateOf(false) }
                 var priority by remember { mutableStateOf(Priority.None) }
                 Column(
-                    modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -130,7 +141,6 @@ fun TaskMakerScreen(
                 var showDialog by remember { mutableStateOf(false) }
                 val dateState = rememberDatePickerState()
                 Column(
-                    modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -177,31 +187,19 @@ fun TaskMakerScreen(
                         name = name,
                         description = desc,
                         priority = priority,
-                        date = Date((dateState.selectedDateMillis?:0L)),
-
+                        date = Date((dateState.selectedDateMillis ?: 0L)),
 
 
                         category = Personal(),
 
-                    )
+                        )
                 }) {
                     Text("Submit")
                 }
-//                TextField(value = "Task Name")
-                Text(text = "YO")
             }
-
-
-
         }
     }
 }
-
-
-
-
-
-
 
 
 @Preview(showBackground = true)
@@ -213,7 +211,7 @@ fun TaskMakerPreview() {
 }
 
 @Composable
-fun BlueBar(modifier: Modifier){
+fun BlueBar(modifier: Modifier) {
     Row(
         modifier = modifier.fillMaxWidth()
     ) {
@@ -221,7 +219,7 @@ fun BlueBar(modifier: Modifier){
             onClick = {},
             modifier = Modifier.fillMaxWidth(),
             shape = RectangleShape,
-            colors = ButtonDefaults.buttonColors(containerColor = Color(68,94,145))
+            colors = ButtonDefaults.buttonColors(containerColor = Color(68, 94, 145))
         ) {
             Icon(imageVector = Icons.Filled.Menu, contentDescription = null)
         }
