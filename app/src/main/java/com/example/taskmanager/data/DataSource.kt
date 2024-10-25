@@ -80,7 +80,7 @@ fun DefaultTasks(): MutableList<Task> {
             id = 2,
             done  = false,
             name = "Work on the Congressional App Challenge",
-            description = "Write up a plan for each meeting, detailing how and when each team member will learn about their robotics subteam",
+            description = "Set up each screen, navigation, plan the app out to fulfill impacts, write a video, code!"
             date = Date(2024, 10, 25),
             category = Projects(),
             priority = Priority.High,
